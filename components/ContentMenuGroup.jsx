@@ -4,6 +4,7 @@ import { open } from '@vizality/modal';
 import { getModule } from '@vizality/webpack';
 
 import MuteModal from './MuteModal';
+import BlacklistModal from './BlacklistModal';
 
 const { sendMessage } = getModule('sendMessage');
 
@@ -28,6 +29,20 @@ export default (props) => {
           label={`Unmute ${user.username}`}
           color='colorDanger'
           action={() => sendMessage(channelId, { content: `;unmute <@${user.id}>` })}
+        />
+        <ContextMenu.Item
+          id='vizality-moderator-tools-blacklist'
+          label={`Blacklist ${user.username}`}
+          color='colorDanger'
+          action={() => open(() => <BlacklistModal
+            user={user}
+            sendMessage={(message) => sendMessage(channelId, { content: message })}/>)}
+        />
+        <ContextMenu.Item
+          id='vizality-moderator-tools-whitelist'
+          label={`Whitelist ${user.username}`}
+          color='colorDanger'
+          action={() => sendMessage(channelId, { content: `;whitelist <@${user.id}>` })}
         />
       </ContextMenu.Group>
     </>
