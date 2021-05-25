@@ -2,7 +2,7 @@ import { Plugin } from '@vizality/entities';
 import { patch, unpatchAll } from '@vizality/patcher';
 import { getModule } from '@vizality/webpack';
 
-import ContentMenuGroup from './components/ContentMenuGroup';
+import GuildChannelUserContextMenuItems from './components/GuildChannelUserContextMenuItems';
 
 export default class VizalityModeratorTools extends Plugin {
   start () {
@@ -34,7 +34,7 @@ export default class VizalityModeratorTools extends Plugin {
             )
         ) return res;
 
-        res?.props.children.props.children.push(ContentMenuGroup({ user, channelId }));
+        res?.props.children.props.children.push(GuildChannelUserContextMenuItems({ user, channelId }));
       }
     );
   }
