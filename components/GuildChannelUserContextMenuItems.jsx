@@ -5,6 +5,7 @@ import { getModule } from '@vizality/webpack';
 
 import MuteModal from './MuteModal';
 import BlacklistModal from './BlacklistModal';
+import MessageModal from './MessageModal';
 
 const { sendMessage } = getModule('sendMessage');
 
@@ -21,6 +22,17 @@ export default (props) => {
           id='vizality-moderator-tools'
           label='Vizality Moderator Tools'
         >
+          <ContextMenu.Item
+            id='vizality-moderator-tools-message'
+            label={`Message ${user.username}`}
+            color='colorDanger'
+            action={() => open(() => <MessageModal
+              targetName={user.username}
+              targetType='user'
+              targetId={user.id}
+              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
+          />
+          <ContextMenu.Separator />
           <ContextMenu.Item
             id='vizality-moderator-tools-mute'
             label={`Mute ${user.username}`}
