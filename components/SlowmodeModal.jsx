@@ -16,7 +16,7 @@ export default memo(({ channelName, sendMessage }) => {
           <TextInput
             placeholder='10'
             value={seconds}
-            onChange={value => setSeconds(`${parseInt(value) || ''}`)}
+            onChange={value => setSeconds(`${value !== '0' ? (parseInt(value) || '') : value}`)}
           />
         </FormItem>
       </Modal.Content>
