@@ -17,6 +17,7 @@ export default memo(({ channelName, sendMessage }) => {
             placeholder='10'
             value={message}
             onChange={value => setMessage(`${parseInt(value) || ''}`)}
+            autoFocus
           />
         </FormItem>
       </Modal.Content>
