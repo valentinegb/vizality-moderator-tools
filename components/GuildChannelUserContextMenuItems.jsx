@@ -6,6 +6,7 @@ import { getModule } from '@vizality/webpack';
 import MuteModal from './MuteModal';
 import BlacklistModal from './BlacklistModal';
 import MessageModal from './MessageModal';
+import EmbedModal from './EmbedModal';
 
 const { sendMessage } = getModule('sendMessage');
 
@@ -27,6 +28,16 @@ export default (props) => {
             label={`Message ${user.username}`}
             color='colorDanger'
             action={() => open(() => <MessageModal
+              targetName={user.username}
+              targetType='user'
+              targetId={user.id}
+              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
+          />
+          <ContextMenu.Item
+            id='vizality-moderator-tools-embed'
+            label='Embed'
+            color='colorDanger'
+            action={() => open(() => <EmbedModal
               targetName={user.username}
               targetType='user'
               targetId={user.id}

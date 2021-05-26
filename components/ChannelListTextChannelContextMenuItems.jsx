@@ -6,6 +6,7 @@ import { getModule } from '@vizality/webpack';
 import SlowmodeModal from './SlowmodeModal';
 import CleanModal from './CleanModal';
 import MessageModal from './MessageModal';
+import EmbedModal from './EmbedModal';
 
 const { sendMessage } = getModule('sendMessage');
 
@@ -23,9 +24,19 @@ export default (props) => {
         >
           <ContextMenu.Item
             id='vizality-moderator-tools-message'
-            label={`Message`}
+            label='Message'
             color='colorDanger'
             action={() => open(() => <MessageModal
+              targetName={`#${channel.name}`}
+              targetType='channel'
+              targetId={channel.id}
+              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
+          />
+          <ContextMenu.Item
+            id='vizality-moderator-tools-embed'
+            label='Embed'
+            color='colorDanger'
+            action={() => open(() => <EmbedModal
               targetName={`#${channel.name}`}
               targetType='channel'
               targetId={channel.id}
