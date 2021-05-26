@@ -4,6 +4,7 @@ import { open } from '@vizality/modal';
 import { getModule } from '@vizality/webpack';
 
 import SlowmodeModal from './SlowmodeModal';
+import CleanModal from './CleanModal';
 
 const { sendMessage } = getModule('sendMessage');
 
@@ -19,6 +20,14 @@ export default (props) => {
           id='vizality-moderator-tools'
           label='Vizality Moderator Tools'
         >
+          <ContextMenu.Item
+            id='vizality-moderator-tools-clean'
+            label='Clean'
+            color='colorDanger'
+            action={() => open(() => <CleanModal
+              channelName={channel.name}
+              sendMessage={(message) => sendMessage(channel.channel_id, { content: message })}/>)}
+          />
           <ContextMenu.Item
             id='vizality-moderator-tools-slowmode'
             label='Set Slowmode'
