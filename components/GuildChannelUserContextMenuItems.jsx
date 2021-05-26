@@ -11,6 +11,7 @@ const { sendMessage } = getModule('sendMessage');
 export default (props) => {
   const { user, channelId } = props;
   delete props.user;
+  delete props.channelId;
 
   return (
     <>

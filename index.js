@@ -1,8 +1,10 @@
 import { Plugin } from '@vizality/entities';
 import { patch, unpatchAll } from '@vizality/patcher';
-import { getModule } from '@vizality/webpack';
+import { Guild } from '@vizality/constants';
+import { getModule, getModules } from '@vizality/webpack';
 
 import GuildChannelUserContextMenuItems from './components/GuildChannelUserContextMenuItems';
+import ChannelListTextChannelContextMenuItems from './components/ChannelListTextChannelContextMenuItems';
 
 export default class VizalityModeratorTools extends Plugin {
   start () {
@@ -18,7 +20,7 @@ export default class VizalityModeratorTools extends Plugin {
         const guildThingy = getModule(m => m.default?.getGuild);
 
         if (
-          guildId !== '689933814864150552' ||
+          guildId !== Guild.ID ||
           user.bot ||
           !getModule('canManageUser')
             .canManageUser(
@@ -35,6 +37,20 @@ export default class VizalityModeratorTools extends Plugin {
         ) return res;
 
         res?.props.children.props.children.push(GuildChannelUserContextMenuItems({ user, channelId }));
+      }
+    );
+
+    patch(
+      getModules(
+        (m) => m.default?.displayName === 'ChannelListTextChannelContextMenu'
+      )[2],
+      'default',
+      (args, res) => {
+        const { channel } = args[0];
+
+        if (channel.guild_id !== Guild.ID) return res;
+
+        res?.props.children.push(ChannelListTextChannelContextMenuItems({ channel }));
       }
     );
   }
