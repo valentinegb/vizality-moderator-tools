@@ -5,6 +5,7 @@ import { getModule, getModules } from '@vizality/webpack';
 
 import GuildChannelUserContextMenuItems from './components/GuildChannelUserContextMenuItems';
 import ChannelListTextChannelContextMenuItems from './components/ChannelListTextChannelContextMenuItems';
+import MessageContextMenuItems from './components/MessageContextMenuItems';
 
 export default class VizalityModeratorTools extends Plugin {
   start () {
@@ -51,6 +52,20 @@ export default class VizalityModeratorTools extends Plugin {
         if (channel.guild_id !== Guild.ID) return res;
 
         res?.props.children.push(ChannelListTextChannelContextMenuItems({ channel }));
+      }
+    );
+
+    patch(
+      getModule(
+        (m) => m.default?.displayName === 'MessageContextMenu'
+      ),
+      'default',
+      (args, res) => {
+        const { channel, message } = args[0];
+
+        if (channel.guild_id !== Guild.ID) return res;
+
+        res?.props.children.push(MessageContextMenuItems({ channel, message }));
       }
     );
   }

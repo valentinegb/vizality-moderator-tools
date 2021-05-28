@@ -7,6 +7,7 @@ import SlowmodeModal from './SlowmodeModal';
 import CleanModal from './CleanModal';
 import MessageModal from './MessageModal';
 import EmbedModal from './EmbedModal';
+import MoveModal from './MoveModal';
 
 const { sendMessage } = getModule('sendMessage');
 
@@ -41,6 +42,14 @@ export default (props) => {
               targetType='channel'
               targetId={channel.id}
               sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
+          />
+          <ContextMenu.Item
+            id='vizality-moderator-tools-move'
+            label='Move Messages'
+            color='colorDanger'
+            action={() => open(() => <MoveModal
+              channelName={channel.name}
+              sendMessage={(message) => sendMessage(channel.id, { content: message })}/>)}
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-clean'
