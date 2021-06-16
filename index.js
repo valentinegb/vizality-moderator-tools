@@ -1,7 +1,7 @@
 import { Plugin } from '@vizality/entities';
 import { patch, unpatchAll } from '@vizality/patcher';
 import { Guild } from '@vizality/constants';
-import { getModule, getModules } from '@vizality/webpack';
+import { getModule } from '@vizality/webpack';
 
 import GuildChannelUserContextMenuItems from './components/GuildChannelUserContextMenuItems';
 import ChannelListTextChannelContextMenuItems from './components/ChannelListTextChannelContextMenuItems';
@@ -42,9 +42,9 @@ export default class VizalityModeratorTools extends Plugin {
     );
 
     patch(
-      getModules(
+      getModule(
         (m) => m.default?.displayName === 'ChannelListTextChannelContextMenu'
-      )[2],
+      ),
       'default',
       (args, res) => {
         const { channel } = args[0];
