@@ -25,7 +25,7 @@ export default (props) => {
         >
           <ContextMenu.Item
             id='vizality-moderator-tools-message'
-            label='Message'
+            label='Send Message'
             color='colorDanger'
             action={() => open(() => <MessageModal
               targetName={`#${channel.name}`}
@@ -35,7 +35,7 @@ export default (props) => {
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-embed'
-            label='Embed'
+            label='Send Embed'
             color='colorDanger'
             action={() => open(() => <EmbedModal
               targetName={`#${channel.name}`}
@@ -43,6 +43,7 @@ export default (props) => {
               targetId={channel.id}
               sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
           />
+          <ContextMenu.Separator />
           <ContextMenu.Item
             id='vizality-moderator-tools-move'
             label='Move Messages'

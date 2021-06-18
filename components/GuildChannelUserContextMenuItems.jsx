@@ -35,7 +35,7 @@ export default (props) => {
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-embed'
-            label='Embed'
+            label='Send Embed'
             color='colorDanger'
             action={() => open(() => <EmbedModal
               targetName={user.username}
