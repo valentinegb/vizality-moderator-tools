@@ -18,6 +18,7 @@ export default memo(({ user, sendMessage }) => {
             placeholder='6h'
             value={duration}
             onChange={value => setDuration(value.replace(' ', ''))}
+            autoFocus
           />
         </FormItem>
         <FormItem

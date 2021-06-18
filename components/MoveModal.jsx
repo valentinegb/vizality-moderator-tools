@@ -18,6 +18,7 @@ export default memo(({ channelName, message, sendMessage }) => {
             placeholder="735710639410118817"
             value={channel}
             onChange={setChannel}
+            autoFocus
           />
         </FormItem>
         {!message && (

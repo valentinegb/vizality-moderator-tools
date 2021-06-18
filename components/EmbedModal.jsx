@@ -57,6 +57,7 @@ export default memo(({ targetName, targetType, targetId, sendMessage }) => {
             placeholder="Nice Embed"
             value={title}
             onChange={setTitle}
+            autoFocus
           />
         </FormItem>
         <FormItem
