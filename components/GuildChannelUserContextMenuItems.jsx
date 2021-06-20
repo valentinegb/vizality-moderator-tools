@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContextMenu } from '@vizality/components';
+import { Confirm, ContextMenu, Text } from '@vizality/components';
 import { open } from '@vizality/modal';
 import { getModule } from '@vizality/webpack';
 
@@ -31,7 +31,8 @@ export default (props) => {
               targetName={user.username}
               targetType='user'
               targetId={user.id}
-              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
+              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}
+            />)}
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-embed'
@@ -41,7 +42,8 @@ export default (props) => {
               targetName={user.username}
               targetType='user'
               targetId={user.id}
-              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
+              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}
+            />)}
           />
           <ContextMenu.Separator />
           <ContextMenu.Item
@@ -50,13 +52,21 @@ export default (props) => {
             color='colorDanger'
             action={() => open(() => <MuteModal
               user={user}
-              sendMessage={(message) => sendMessage(channelId, { content: message })}/>)}
+              sendMessage={(message) => sendMessage(channelId, { content: message })}
+            />)}
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-unmute'
             label={`Unmute ${user.username}`}
             color='colorDanger'
-            action={() => sendMessage(channelId, { content: `;unmute <@${user.id}>` })}
+            action={() => open(() => <Confirm
+              header={`Unmute ${user.username}`}
+              confirmText='Unmute'
+              cancelText='Cancel'
+              onConfirm={() => sendMessage(channelId, { content: `;unmute <@${user.id}>` })}
+            >
+              <Text size={Text.Sizes.SIZE_16}>Are you sure you want to unmute {user.username}?</Text>
+            </Confirm>)}
           />
           <ContextMenu.Separator />
           <ContextMenu.Item
@@ -65,13 +75,21 @@ export default (props) => {
             color='colorDanger'
             action={() => open(() => <BlacklistModal
               user={user}
-              sendMessage={(message) => sendMessage(channelId, { content: message })}/>)}
+              sendMessage={(message) => sendMessage(channelId, { content: message })}
+            />)}
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-whitelist'
             label={`Whitelist ${user.username}`}
             color='colorDanger'
-            action={() => sendMessage(channelId, { content: `;whitelist <@${user.id}>` })}
+            action={() => open(() => <Confirm
+              header={`Whitelist ${user.username}`}
+              confirmText='Whitelist'
+              cancelText='Cancel'
+              onConfirm={() => sendMessage(channelId, { content: `;whitelist <@${user.id}>` })}
+            >
+              <Text size={Text.Sizes.SIZE_16}>Are you sure you want to whitelist {user.username}?</Text>
+            </Confirm>)}
           />
         </ContextMenu.Item>
       </ContextMenu.Group>

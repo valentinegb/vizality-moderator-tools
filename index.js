@@ -37,7 +37,13 @@ export default class VizalityModeratorTools extends Plugin {
             )
         ) return res;
 
-        res?.props.children.props.children.push(GuildChannelUserContextMenuItems({ user, channelId }));
+        const { children } = res?.props.children.props;
+
+        children.splice(
+          children.findIndex(value => value?.props?.children[0]?.props?.id === 'kick') + 1,
+          0,
+          GuildChannelUserContextMenuItems({ user, channelId })
+        );
       }
     );
 
@@ -51,7 +57,15 @@ export default class VizalityModeratorTools extends Plugin {
 
         if (channel.guild_id !== Guild.ID) return res;
 
-        res?.props.children.push(ChannelListTextChannelContextMenuItems({ channel }));
+        const { children } = res?.props;
+
+        children.splice(
+          children.findIndex(
+            value => value?.props?.children[0]?.props?.id === 'invite-people'
+          ) + 1,
+          0,
+          ChannelListTextChannelContextMenuItems({ channel })
+        );
       }
     );
 
@@ -65,7 +79,15 @@ export default class VizalityModeratorTools extends Plugin {
 
         if (channel.guild_id !== Guild.ID) return res;
 
-        res?.props.children.push(MessageContextMenuItems({ channel, message }));
+        const { children } = res?.props;
+
+        children.splice(
+          children.findIndex(
+            value => value?.props?.children?.find(value => value?.props?.id === 'delete')
+          ) + 1,
+          0,
+          MessageContextMenuItems({ channel, message })
+        );
       }
     );
   }
