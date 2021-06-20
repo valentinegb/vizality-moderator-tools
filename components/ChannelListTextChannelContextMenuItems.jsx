@@ -7,6 +7,7 @@ import SlowmodeModal from './SlowmodeModal';
 import CleanModal from './CleanModal';
 import MessageModal from './MessageModal';
 import EmbedModal from './EmbedModal';
+import WebhookModal from './WebhookModal';
 import MoveModal from './MoveModal';
 
 const { sendMessage } = getModule('sendMessage');
@@ -31,7 +32,8 @@ export default (props) => {
               targetName={`#${channel.name}`}
               targetType='channel'
               targetId={channel.id}
-              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
+              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}
+            />)}
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-embed'
@@ -41,7 +43,17 @@ export default (props) => {
               targetName={`#${channel.name}`}
               targetType='channel'
               targetId={channel.id}
-              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}/>)}
+              sendMessage={(message) => sendMessage('765078263009247254', { content: message })}
+            />)}
+          />
+          <ContextMenu.Item
+            id='vizality-moderator-tools-webhook'
+            label='Send Webhook'
+            color='colorDanger'
+            action={() => open(() => <WebhookModal
+              channelName={channel.name}
+              sendMessage={(message) => sendMessage(channel.id, { content: message })}
+            />)}
           />
           <ContextMenu.Separator />
           <ContextMenu.Item
@@ -50,7 +62,8 @@ export default (props) => {
             color='colorDanger'
             action={() => open(() => <MoveModal
               channelName={channel.name}
-              sendMessage={(message) => sendMessage(channel.id, { content: message })}/>)}
+              sendMessage={(message) => sendMessage(channel.id, { content: message })}
+            />)}
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-clean'
@@ -58,7 +71,8 @@ export default (props) => {
             color='colorDanger'
             action={() => open(() => <CleanModal
               channelName={channel.name}
-              sendMessage={(message) => sendMessage(channel.id, { content: message })}/>)}
+              sendMessage={(message) => sendMessage(channel.id, { content: message })}
+            />)}
           />
           <ContextMenu.Item
             id='vizality-moderator-tools-slowmode'
@@ -66,7 +80,8 @@ export default (props) => {
             color='colorDanger'
             action={() => open(() => <SlowmodeModal
               channelName={channel.name}
-              sendMessage={(message) => sendMessage(channel.id, { content: message })}/>)}
+              sendMessage={(message) => sendMessage(channel.id, { content: message })}
+            />)}
           />
         </ContextMenu.Item>
       </ContextMenu.Group>
